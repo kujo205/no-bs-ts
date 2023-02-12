@@ -13,34 +13,18 @@ interface HouseWithID extends House {
   id: string;
 }
 
-function findHouses(houses: string): HouseWithID[];
-
-function findHouses(
-  houses: string,
-  filter: (house: House) => boolean
-): HouseWithID[];
-
-function findHouses(houses: House[]): HouseWithID[];
-
-function findHouses(
-  houses: House[],
-  filter: (house: House) => boolean
-): HouseWithID[];
-
 function findHouses(
   houses: House[] | string,
   filter?: (house: House) => boolean
 ): HouseWithID[] {
-  if (typeof houses === "string") {
-    houses = JSON.parse(houses) as House[];
-  }
-
-  let housesWithId = houses.map((house) => {
+  
+  let modifiedHouses = ((typeof houses === "string")?JSON.parse(houses):houses) as House[];
+    let housesWithId=modifiedHouses.map((house,index) => {
     return {
       ...house,
-      id: house.name,
+      id: index,
     };
-  });
+  }) as unknown as HouseWithID[];
 
   if (filter) {
     housesWithId = housesWithId.filter(filter);
