@@ -5,10 +5,10 @@ const houses = [
     { name: "Harkonnen", planets: ["Giedi Prime", "Arrakis"] },
 ];
 function findHouses(houses, filter) {
-    if (typeof houses === 'string') {
+    if (typeof houses === "string") {
         houses = JSON.parse(houses);
     }
-    let housesWithId = houses.map(house => {
+    let housesWithId = houses.map((house) => {
         return Object.assign(Object.assign({}, house), { id: house.name });
     });
     if (filter) {
